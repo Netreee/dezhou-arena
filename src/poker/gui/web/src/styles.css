@@ -1,0 +1,28 @@
+:root { color-scheme: dark; }
+body { margin: 0; background: radial-gradient(ellipse at top, #1a353a, #0c181b 65%); }
+.app-shell { padding-top: 36px; padding-bottom: 48px; }
+.seat-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; min-height: 60px; }
+.seat, .own-hand, .action-bar { padding: 20px; }
+.seat-cards { margin-top: 12px; }
+.seat-cards .playing-card { width: 34px; height: 48px; border-radius: 5px; }
+.seat-cards .card-corner { font-size: 9px; padding: 3px; }
+.seat-cards .card-suit, .seat-cards .back-mark { font-size: 24px; }
+.table-felt { padding: 28px 20px; text-align: center; border-radius: 100px; border: 10px solid #263337; background: radial-gradient(ellipse, #176452, #0b4238); box-shadow: inset 0 0 50px #062f2980; }
+.board-cards { margin-top: 16px; }
+.playing-card { width: 76px; height: 108px; border-radius: 9px; position: relative; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.card-face { background: #faf8f1; box-shadow: 0 4px 10px #0003; }
+.card-slot { border: 1px dashed #93baa777; background: #083a3022; }
+.card-back { background: repeating-linear-gradient(45deg, #254d6a, #254d6a 4px, #1a3d58 4px, #1a3d58 8px); border: 3px solid #9fb1bf; }
+.card-corner { position: absolute; top: 0; left: 0; padding: 7px; font-size: 15px; font-weight: 700; line-height: 1.1; }
+.card-suit { font-size: 46px; }
+.back-mark { color: #d8e4eb; font-size: 38px; }
+.slot-mark { color: #93baa7; font-size: 30px; }
+@media (max-width: 640px) {
+  .app-shell { padding-top: 20px; }
+  .seat-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+  .seat { padding: 12px; }
+  .playing-card { width: 46px; height: 68px; }
+  .card-corner { padding: 4px; font-size: 11px; }
+  .card-suit { font-size: 30px; }
+  .table-felt { padding: 24px 8px; border-width: 5px; border-radius: 40px; }
+}

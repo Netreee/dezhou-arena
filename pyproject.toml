@@ -1,0 +1,37 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "local-holdem"
+version = "0.1.0"
+description = "Local Texas Hold'em with CLI, browser UI and structured diagnostics"
+requires-python = ">=3.12"
+dependencies = ["structlog==26.1.0", "jsonschema>=4,<5"]
+
+[project.optional-dependencies]
+dev = ["mypy>=1.11,<2", "httpx2>=2,<3", "jsonschema>=4,<5", "types-jsonschema"]
+gui = ["fastapi>=0.115,<1", "uvicorn>=0.30,<1"]
+
+[project.scripts]
+poker-server = "poker.bootstrap:server_main"
+poker-client = "poker.bootstrap:client_main"
+poker-gui-bridge = "poker.gui.bootstrap:main"
+poker-bot = "poker.bot.runtime:main"
+poker-agent = "poker.agent.__main__:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+namespaces = false
+
+[tool.setuptools.package-data]
+"poker" = ["py.typed"]
+"poker.persistence" = ["schema.sql"]
+"poker.gui" = ["web/dist/index.html", "web/dist/assets/*"]
+"shared_logging" = ["py.typed", "event.schema.json"]
+
+[tool.mypy]
+python_version = "3.12"
+strict = true
+files = ["src", "tests", "scripts"]
+exclude = ['^src/poker/gui/web/(node_modules|dist)/']

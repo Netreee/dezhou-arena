@@ -1,0 +1,54 @@
+# Python environments and generated files
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+*.egg-info/
+.mypy_cache/
+.pytest_cache/
+build/
+dist/
+
+# Frontend dependencies, production bundles and coverage
+node_modules/
+.vite/
+coverage/
+.coverage
+htmlcov/
+
+# Local sessions, verification evidence and downloaded references
+.data/
+docs/evidence/
+docs/I01/
+docs/*RECEIPT.json
+HKU_COMP7607_Fall2025_public_slides/
+DSec_Agent_Training_Reading/
+*.log
+*.jsonl
+*.sqlite*
+*.db
+*.pid
+*.tmp
+*.bak
+*.bundle
+*.zip
+*.tar.gz
+
+# Credentials and machine-specific settings
+.env
+.env.*
+!.env.example
+.codex/
+.secrets/
+secrets/
+credentials*.json
+*.pem
+*.key
+*.p12
+*.pfx
+id_rsa*
+id_ed25519*
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db

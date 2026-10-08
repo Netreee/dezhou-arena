@@ -1,0 +1,38 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Shared structured log event v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "ts", "level", "service", "component", "process_role", "pid", "run_id", "event", "message", "context", "data", "error"],
+  "properties": {
+    "schema_version": {"const": 1},
+    "ts": {"type": "string", "format": "date-time", "pattern": "Z$"},
+    "level": {"enum": ["DEBUG", "INFO", "WARNING", "ERROR", "CRITICAL"]},
+    "service": {"type": "string", "minLength": 1},
+    "component": {"type": "string", "minLength": 1},
+    "process_role": {"type": "string", "minLength": 1},
+    "pid": {"type": ["integer", "null"], "minimum": 0},
+    "run_id": {"type": "string", "minLength": 1},
+    "event": {"type": "string", "minLength": 1},
+    "message": {"type": "string"},
+    "context": {"type": "object", "additionalProperties": {"type": ["string", "number", "boolean", "null"]}},
+    "data": {"type": "object", "additionalProperties": {"$ref": "#/$defs/jsonValue"}},
+    "error": {
+      "oneOf": [
+        {"type": "null"},
+        {"type": "object", "additionalProperties": false, "required": ["type", "message", "stack"], "properties": {
+          "type": {"type": "string"}, "message": {"type": "string"}, "stack": {"type": ["string", "null"]}
+        }}
+      ]
+    }
+  },
+  "$defs": {
+    "jsonValue": {
+      "oneOf": [
+        {"type": ["string", "number", "boolean", "null"]},
+        {"type": "array", "items": {"$ref": "#/$defs/jsonValue"}},
+        {"type": "object", "additionalProperties": {"$ref": "#/$defs/jsonValue"}}
+      ]
+    }
+  }
+}

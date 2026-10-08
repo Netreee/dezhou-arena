@@ -1,0 +1,195 @@
+{
+  "schema_version": 1,
+  "captured_on": "2026-10-08",
+  "scope": "Sanitized summary of engineering checks. Historical runs use their archived source versions; strategy strength is not evaluated.",
+  "raw_evidence_policy": "Raw logs, model payloads, databases and original receipts remain local under .data/local-archive; new runs should use .data/verification.",
+  "historical_runs": [
+    {
+      "id": "I01",
+      "scope": "I01: three independent installed CLI processes + independent production server_main process",
+      "request_count": 80,
+      "checks": {
+        "four_distinct_processes": true,
+        "three_cli_joins": true,
+        "normal_multi_street": true,
+        "all_ins_main_side_different_winners": true,
+        "uncalled_refund": true,
+        "uncontested_no_board_no_reveal": true,
+        "explicit_next_hand_chip_carry": true,
+        "all_cli_checkpoints_match_wire_views": true,
+        "private_visibility_matches_sqlite": true,
+        "no_manual_state_commands": true,
+        "idle_completed_hand_not_paid_twice": true,
+        "cards_partition_52": true,
+        "chips_conserved_3000": true,
+        "copied_sqlite_reopened": true,
+        "all_processes_exit_zero": true
+      },
+      "all_entrypoints_exit_zero": true,
+      "completed_hands": 3
+    },
+    {
+      "id": "G05",
+      "scope": "G05 + L02/L04: browser GUI player + two installed CLI processes + real server and bridge",
+      "request_count": 1306,
+      "checks": {
+        "all_four_processes_exit_zero": true,
+        "private_views_match_sqlite": true,
+        "normal_four_streets": true,
+        "main_and_side_different_winners": true,
+        "uncalled_refund": true,
+        "uncontested_without_reveal": true,
+        "idle_complete_does_not_pay_twice": true,
+        "explicit_hand4": true,
+        "each_request_correlated_across_processes": true,
+        "all_logs_match_schema": true
+      },
+      "all_entrypoints_exit_zero": true,
+      "completed_hands": 3,
+      "actions": 15,
+      "starts": 4,
+      "logging_events": 4900
+    },
+    {
+      "id": "A01",
+      "scope": "Two independent production agent entrypoints, each using PokerCli, and an independent production server_main process",
+      "request_count": 108,
+      "checks": {
+        "three_distinct_processes": true,
+        "two_distinct_players": true,
+        "all_views_match_sqlite_revision": true,
+        "private_cards_isolated": true,
+        "complete_history_in_all_hand_views": true,
+        "two_hands_completed": true,
+        "four_streets_each_hand": true,
+        "guarded_actions_confirmed_once": true,
+        "analysis_tools_executed": true,
+        "single_auto_start_owner": true,
+        "chips_conserved_2000": true,
+        "cards_partition_52": true,
+        "sqlite_reopened": true,
+        "structured_logs_validated": true,
+        "all_processes_exit_zero": true
+      },
+      "all_entrypoints_exit_zero": true,
+      "completed_hands": 2,
+      "logging_events": 489
+    },
+    {
+      "id": "M01",
+      "scope": "One game process/port, two tables, two installed CLIs, one installed Agent and real browser GUI",
+      "request_count": 1776,
+      "checks": {
+        "one_game_listener": true,
+        "all_clients_same_game_port": true,
+        "separate_table_consumers": true,
+        "other_table_unchanged_during_two_hands": true,
+        "private_views_isolated": true,
+        "cards_52_each": true,
+        "chips_2000_each": true,
+        "browser_four_streets": true,
+        "agent_table_selection": true,
+        "all_processes_exit_zero": true,
+        "all_logs_match_schema": true
+      },
+      "all_entrypoints_exit_zero": true,
+      "logging_events": 6222,
+      "active_tables": 2
+    },
+    {
+      "id": "N01",
+      "scope": "G05 + L02/L04: browser GUI player + two installed CLI processes + real server and bridge",
+      "request_count": 1199,
+      "checks": {
+        "all_four_processes_exit_zero": true,
+        "private_views_match_sqlite": true,
+        "normal_four_streets": true,
+        "main_and_side_different_winners": true,
+        "uncalled_refund": true,
+        "uncontested_without_reveal": true,
+        "idle_complete_does_not_pay_twice": true,
+        "explicit_hand4": true,
+        "each_request_correlated_across_processes": true,
+        "all_logs_match_schema": true
+      },
+      "all_entrypoints_exit_zero": true,
+      "completed_hands": 3,
+      "actions": 15,
+      "starts": 4,
+      "logging_events": 4503,
+      "network_scope": "Same computer via actual LAN interface; second host and VPN link not tested"
+    },
+    {
+      "id": "A02_overnight",
+      "scope": "Historical six-policy batch, live and stub results counted separately",
+      "overall_ok": true,
+      "totals": {
+        "rounds": 18,
+        "passed": 18,
+        "failed": 0,
+        "hands": 36,
+        "requests": 14877,
+        "actions": 1085,
+        "snapshots": 1229,
+        "log_events": 11999,
+        "live_rounds": 2,
+        "stub_rounds": 16,
+        "model_attempts": 42,
+        "known_input_tokens": 511718,
+        "known_output_tokens": 1155,
+        "cost": null,
+        "deck_mode_counts": {
+          "fixed": 9,
+          "random": 9
+        },
+        "seat_rotation_counts": {
+          "0": 3,
+          "1": 3,
+          "2": 3,
+          "3": 3,
+          "4": 3,
+          "5": 3
+        },
+        "actions_by_mechanism": {
+          "rules": 176,
+          "mixed": 193,
+          "lookup": 184,
+          "stateful": 174,
+          "solver": 170,
+          "natural_language": 188
+        }
+      },
+      "limitations": [
+        "18 rounds contain two source versions; rounds 0-1 and 2-17 must be reported separately despite no within-round drift.",
+        "Model attempt records retain typed answers, usage, event names and stream hashes; full provider stdout and raw prompts were not retained, so their hashes cannot be independently recomputed here.",
+        "Native attempt IDs and API logger IDs are distinct; reconciliation uses serial order plus decision revision, final action and token counts.",
+        "No provider billing ledger or verified monetary prices were recorded; monetary cost remains null.",
+        "Historical pilot source differs from current source and is supplemental evidence, not part of the 18-round batch.",
+        "R01 uses explicit fixtures, including local HTTP; it proves no real external model inference and no playing strength.",
+        "Process exit and cleanup are checked from raw logs and recorded exit codes; historical PID values can be reused by Windows, so current process ownership is checked separately."
+      ]
+    }
+  ],
+  "publication_checks": {
+    "checked_on": "2026-10-08",
+    "python_unit_tests": {
+      "passed": 321,
+      "skipped": 0
+    },
+    "mypy_strict_files": 116,
+    "frontend_tests_passed": 20,
+    "production_build": "passed",
+    "pip_check": "passed",
+    "secret_scan": {
+      "tool": "gitleaks",
+      "version": "8.30.1",
+      "findings": 0,
+      "scope": "complete staged source tree"
+    },
+    "local_path_and_personal_metadata_scan": {
+      "findings": 0,
+      "scope": "complete staged source tree"
+    },
+    "new_external_model_calls": 0
+  }
+}
