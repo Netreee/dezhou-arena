@@ -19,7 +19,7 @@ from poker.agent.models import (
     HandCompleted, InvalidDecision, Observation, ObservationChanged, PolicyEvent, PolicySession,
     StopReason, ToolBudgetExceeded, select_action,
 )
-from poker.agent.policy import Policy
+from poker.agent.decision_engine import DecisionEngine
 from poker.agent.tools import BoundTools, ToolRegistry, standard_tools
 from poker.client.guarded import ViewToken
 from poker.domain.models import PlayerAction
@@ -97,7 +97,7 @@ class _PolicyWorker:
     A standalone agent process can then exit without waiting for this daemon.
     """
 
-    def __init__(self, policy: Policy) -> None:
+    def __init__(self, policy: DecisionEngine) -> None:
         self._policy = policy
         self._queue: Queue[_Work | None] = Queue()
         self._stop = Event()
@@ -160,7 +160,7 @@ class _Submission:
 
 
 class AgentRunner:
-    def __init__(self, port: AgentCliPort, policy: Policy, config: AgentConfig,
+    def __init__(self, port: AgentCliPort, policy: DecisionEngine, config: AgentConfig,
                  *, tools: ToolRegistry | None = None, stop: Event | None = None) -> None:
         self._port = port
         self._policy = policy

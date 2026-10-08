@@ -2,7 +2,7 @@
 
 版本 1.1，2026-10-08。本文件是项目工程规范的总入口，集中维护需求、模块边界、运行方式、验收和范围。[Policy 接口参考](src/poker/agent/README.md)详细说明策略扩展契约。[公开验收摘要](docs/VALIDATION.json)保留工程结论；原始 JSON 回执、SQLite、JSONL 和截图作为本地验收数据归档；实际类型与唯一的 [日志 schema](src/shared_logging/event.schema.json) 执行字段契约。
 
-**E01–E06、C01、I01、G01–G05、L01–L04、A01–A04、M01、N01 已交付。** 项目提供服务端权威的无限注德州、自动轮询 CLI、可玩的 Web GUI、可替换 Policy 的独立 Agent 运行入口和统一结构化日志。一个游戏服务进程和 TCP 端口通过 TableRegistry 管理多个独立 TableRuntime，网页入口支持真实 / 虚拟局域网访问。ABC 中的抽象方法定义可替换角色；模型供应商、求解器和训练算法通过扩展接口接入。
+**E01–E06、C01、I01、G01–G05、L01–L04、A01–A04、M01、N01、R01 已交付。** 项目提供服务端权威的无限注德州、自动轮询 CLI、可玩的 Web GUI、可替换 Policy 的独立 Agent 运行入口和统一结构化日志。一个游戏服务进程和 TCP 端口通过 TableRegistry 管理多个独立 TableRuntime，网页入口支持真实 / 虚拟局域网访问。ABC 中的抽象方法定义可替换角色；模型供应商、求解器和训练算法通过扩展接口接入。
 
 [Agent 研究笔记](docs/AGENT_RESEARCH.md)按问题、策略表示、学术成果、实验方法整理前期调研，是非规范性研究资料。框架交付证明接入与运行可靠性；策略竞技水平需要另行评测。
 
@@ -66,6 +66,8 @@ CLI 输入 `join 甲`。至少两名有筹码玩家入座后，任意已入座�
 
 桥接默认 `--host 127.0.0.1`，游戏 TCP 始终使用本机 8765；只需让同学可达网页 8770。如 Windows 防火墙阻止入站，允许所用网络接口上的 TCP 8770。当前入口按可信局域网使用，没有账号认证或 TLS；此步骤不需要公网端口映射。断线和刷新行为仍按第 8 节执行。
 
+本分支 `experiment` 在 `main` 的多桌与局域网工程上加入 [ReAct Agent](src/poker/agent/react/README.md)：模型循环、策略引导、记忆、分析工具和可替换后端。原策略接口通过 DecisionEngine 兼容，机械基线仍可运行。
+
 ## 2. 需求与交付映射
 
 | 工作段 | 必须交付的行为 | 实现与验收 |
@@ -89,6 +91,7 @@ CLI 输入 `join 甲`。至少两名有筹码玩家入座后，任意已入座�
 | L04 | 来源、链路、异常、上下文隔离、持久化与字段策略 | 日志测试和真实进程验收 |
 | M01 | 单游戏进程 / 端口多桌、入座选桌、连接绑定与隔离 | server.py 的 TableRuntime / TableRegistry；[公开验收摘要](docs/VALIDATION.json) |
 | N01 | 主机双进程、网页单入口、真实 / 虚拟局域网浏览器联机 | gui/bootstrap.py 的 --host；[公开验收摘要](docs/VALIDATION.json) |
+| R01 | 模型循环、策略引导、记忆、后端替换、预算与六 Agent 联调 | ReActAgent / ModelBackend / Policy；verify_react_agents.py 与公开验收摘要 |
 | A01 | Policy 单一必要决策入口、可选生命周期、确定动作 / 有限混合策略 | agent/policy.py、models.py、test_contracts.py |
 | A02 | 独立进程、串行策略 worker、持续 CLI 轮询、期限 / 取消 / 确认 / 关闭 | AgentRunner、test_runtime.py、真实两 Agent 对局 |
 | A03 | CLI 唯一接入、公开历史与规则配置、过期动作双重校验、分析工具边界 | PokerCliAgentAdapter、guarded.py、ToolRegistry、协议兼容测试 |
@@ -355,3 +358,5 @@ M01 驱动要求网页进入 1001 桌并逐街过牌，1002 桌 CLI / Agent 自�
 本机清理前的 Git bundle 与工作区备份在 `.data/publication/before-cleanup/`；原始证据在 `.data/local-archive/docs/`，下载资料在 `.data/local-archive/research/`。原始字节与历史回执保持原样，用于本地核查，不随源码公开。重新生成验收数据也使用 `.data/verification/`。
 
 维护时先更新实现与有效测试，再修订本文件。新增正式需求写入需求映射与完成条件，避免另建并行架构 / 模块状态 / 阶段进度文档。机器 schema、源代码类型和验收摘要各自承担对应职责。
+
+ReAct 分支的离线六人复现：`scripts/verify_react_agents.py --output-dir .data/verification/react-new --backend fixture`；真实模型需要显式选择并配置认证。本次公开发布只执行离线 / 本机 HTTP 验证。详见 ReAct 接口文档。

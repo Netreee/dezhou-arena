@@ -1,3 +1,5 @@
+> 在 experiment 分支，本文描述兼容的 action-producing DecisionEngine；旧 `poker.agent.policy.Policy` 为其别名。以模型循环为核心的新 Policy 契约见 [ReAct Agent](react/README.md)。
+
 # poker.agent：Policy 接口参考
 
 本文件说明已经实现的 `poker.agent` 包 API。项目需求、模块架构、安装和验收统一以[仓库 README](../../../README.md)为准；研究背景见[Agent 研究笔记](../../../docs/AGENT_RESEARCH.md)。

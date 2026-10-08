@@ -168,28 +168,63 @@
         "R01 uses explicit fixtures, including local HTTP; it proves no real external model inference and no playing strength.",
         "Process exit and cleanup are checked from raw logs and recorded exit codes; historical PID values can be reused by Windows, so current process ownership is checked separately."
       ]
+    },
+    {
+      "id": "R01_model_fixture",
+      "scope": "Historical six-Agent ReAct engineering validation; no external model inference",
+      "cli_requests": 451,
+      "actions": 48,
+      "model_calls": 104,
+      "tool_calls": 104,
+      "http_calls": 0,
+      "log_events": 1079,
+      "seven_exit_codes_zero": true,
+      "external_model_inference": false
+    },
+    {
+      "id": "R01_local_http",
+      "scope": "Historical six-Agent ReAct engineering validation; no external model inference",
+      "cli_requests": 545,
+      "actions": 48,
+      "model_calls": 104,
+      "tool_calls": 104,
+      "http_calls": 104,
+      "log_events": 1183,
+      "seven_exit_codes_zero": true,
+      "external_model_inference": false
     }
   ],
   "publication_checks": {
     "checked_on": "2026-10-08",
     "python_unit_tests": {
-      "passed": 321,
+      "passed": 392,
       "skipped": 0
     },
-    "mypy_strict_files": 116,
-    "frontend_tests_passed": 20,
-    "production_build": "passed",
-    "pip_check": "passed",
-    "secret_scan": {
-      "tool": "gitleaks",
-      "version": "8.30.1",
-      "findings": 0,
-      "scope": "complete staged source tree"
-    },
-    "local_path_and_personal_metadata_scan": {
-      "findings": 0,
-      "scope": "complete staged source tree"
-    },
-    "new_external_model_calls": 0
+    "mypy_strict_files": 133,
+    "frontend_source": "Identical to main; main passed 20 tests and production build",
+    "react_help": "passed",
+    "new_external_model_calls": 0,
+    "current_react_runs": [
+      {
+        "backend": "fixture",
+        "ok": true,
+        "hands": 2,
+        "actions": 48,
+        "model_calls": 104,
+        "http_fixture_calls": 0,
+        "external_model_inference": false,
+        "all_seven_entrypoints_exit_zero": true
+      },
+      {
+        "backend": "http-fixture",
+        "ok": true,
+        "hands": 2,
+        "actions": 48,
+        "model_calls": 104,
+        "http_fixture_calls": 104,
+        "external_model_inference": false,
+        "all_seven_entrypoints_exit_zero": true
+      }
+    ]
   }
 }

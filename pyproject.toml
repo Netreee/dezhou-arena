@@ -19,6 +19,7 @@ poker-client = "poker.bootstrap:client_main"
 poker-gui-bridge = "poker.gui.bootstrap:main"
 poker-bot = "poker.bot.runtime:main"
 poker-agent = "poker.agent.__main__:main"
+poker-react-agent = "poker.agent.react.__main__:main"
 
 [tool.setuptools.packages.find]
 where = ["src"]
